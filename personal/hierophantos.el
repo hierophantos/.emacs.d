@@ -55,7 +55,7 @@
 
 (add-hook 'prelude-prog-mode-hook 'disable-guru-mode t)
 
-;; (scroll-bar-mode -1)
+(scroll-bar-mode -1)
 
 ;; turn off whitespace mode
 (add-hook 'prog-mode-hook 'prelude-turn-off-whitespace t)
