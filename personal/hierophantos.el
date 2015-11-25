@@ -1,5 +1,9 @@
+;;; package --- Summary
+;;; Commentary:
+
 ;;; My Personal Emacs Customizations
 
+;;; Code:
 ;;; My Key Bindings
 (global-set-key (kbd "C-h") 'delete-backward-char)
 
@@ -21,7 +25,7 @@
 ;; (global-set-key [M-down] 'shrink-window)
 ;; (global-set-key [M-up] 'enlarge-window) 
 
-(global-set-key (kbd "C-c C-u") 'cider-eval-print-last-sexp)
+;; (global-set-key (kbd "C-c C-u") 'cider-eval-print-last-sexp)
 ;; (global-set-key [C-c C-u] 'cider-eval-print-handler)
 
 (global-set-key [C-s-o] 'project-explorer-mode)
@@ -29,6 +33,13 @@
 ;; Command->meta, alt->super
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
+
+;; Move Window with Mouse
+(global-set-key [M-wheel-down] 'shrink-window)
+(global-set-key [M-wheel-up] 'enlarge-window)
+(global-set-key [M-wheel-left] 'shrink-window-horizontally)
+(global-set-key [M-wheel-right] 'enlarge-window-horizontally)
+
 
 ;;; Mouse Input
 (unless window-system
@@ -43,12 +54,14 @@
   (defun track-mouse (e))
   (setq mouse-sel-mode t))
 
-;;; My Modes
+;;; My Modes:
 ;; (add-to-list 'load-path "/Users/Sophia/.emacs.d/elpa/newlisp-mode")
 ;; (require 'newlisp-mode)
 
 (require 'golden-ratio)
 ;; (golden-ratio-mode nil)
+
+(add-hook 'prelude-prog-mode-hook 'indent-guide-mode)
 
 (defun disable-guru-mode ()
   (guru-mode -1))
@@ -58,29 +71,17 @@
 (scroll-bar-mode -1)
 
 ;; turn off whitespace mode
-(add-hook 'prog-mode-hook 'prelude-turn-off-whitespace t)
+;; (add-hook 'prog-mode-hook 'prelude-turn-off-whitespace t)
 (setq prelude-whitespace nil)
 
-
+;; one day, young padawan... <this doesn't work>
+;(add-hook 'prelude-prog-mode-hook 'enable-linum-mode t)
 
 
 ;; thesaurus api key
 (setq thesaurus-bhl-api-key "93daf90302a27348144b0c6a945eea62")
 
 
-
-;; Append result of evaluating previous expression (Clojure):
-;; (define-key clojure-mode-map (kbd "C-i i") 'cider-eval-last-sexp-and-append)
-;; cider-eval-and-get-value no longer supported in cider *poo-poo*
-(defun cider-eval-last-sexp-and-append ()
-  "Evaluate the expression preceding point and append result."
-  (interactive)
-  (let ((last-sexp (cider-last-sexp)))
-    ;; we have to be sure the evaluation won't result in an error
-    (cider-eval-and-get-value last-sexp)
-    (with-current-buffer (current-buffer)
-      (insert ";;=>"))
-    (cider-interactive-eval-print last-sexp)))
 
 
 ;;; Macro Macro from Bryan Maass
