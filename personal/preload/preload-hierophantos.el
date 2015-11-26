@@ -3,7 +3,7 @@
 
 
 ;; (setq prelude-theme 'sanityinc-tomorrow-eighties)
-(setq prelude-theme 'monokay)
+(setq prelude-theme 'monokai)
 
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
