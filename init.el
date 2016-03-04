@@ -36,7 +36,7 @@
       (getenv
        (if (equal system-type 'windows-nt) "USERNAME" "USER")))
 
-(message "Prelude is powering up... Prepare for The Revelation,  %s!" current-user)
+(message "Prelude is powering up... Prepare for The Revelation, %s!" current-user)
 
 (when (version< emacs-version "24.1")
   (error "Prelude requires at least GNU Emacs 24.1, but you're running %s" emacs-version))
@@ -113,8 +113,11 @@ by Prelude.")
 (message "Loading Prelude's modules...")
 
 ;; the modules
-(when (file-exists-p prelude-modules-file)
-  (load prelude-modules-file))
+(if (file-exists-p prelude-modules-file)
+    (load prelude-modules-file)
+  (message "Missing modules file %s" prelude-modules-file)
+  (message "You can get started by copying the bundled example file"))
+
 
 ;; config changes made through the customize UI will be store here
 (setq custom-file (expand-file-name "custom.el" prelude-personal-dir))
@@ -124,10 +127,11 @@ by Prelude.")
   (message "Loading personal configuration files in %s..." prelude-personal-dir)
   (mapc 'load (directory-files prelude-personal-dir 't "^[^#].*el$")))
 
-(message "Hie be the hackening,  %s!" current-user)
+(message "Hie be the hackening, %s!" current-user)
 
 (prelude-eval-after-init
  ;; greet the use with some useful tip
  (run-at-time 5 nil 'prelude-tip-of-the-day))
 
 ;;; init.el ends here
+(put 'scroll-left 'disabled nil)

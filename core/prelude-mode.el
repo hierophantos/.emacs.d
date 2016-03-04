@@ -36,7 +36,7 @@
 (defvar prelude-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c o") 'prelude-open-with)
-    (define-key map (kbd "C-c g") 'prelude-google)
+    ;; (define-key map (kbd "C-c g") 'prelude-google)  ;; 'helm-google instead
     (define-key map (kbd "C-c G") 'prelude-github)
     (define-key map (kbd "C-c y") 'prelude-youtube)
     (define-key map (kbd "C-c U") 'prelude-duckduckgo)
@@ -109,7 +109,7 @@
 
                         ("General"
                          ["Visit term buffer" prelude-visit-term-buffer]
-                         ["Search in Google" prelude-google]
+                         ;; ["Search in Google" prelude-google]
                          ["View URL" prelude-view-url]))
                       "Search Files (Grep)...")
 
